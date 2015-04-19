@@ -4,7 +4,7 @@
 loop() ->
 	receive
 		{temperature,{C, F}} ->
-			io.fwrite("Celcius: ~g, Fahrenheit: ~g ~n"),
+			io:fwrite("Celcius: ~g, Fahrenheit: ~g ~n"),
 			loop();
 		_ ->
 			io:fwrite("Can't display~n"),
