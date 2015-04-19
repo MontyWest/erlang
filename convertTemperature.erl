@@ -1,27 +1,22 @@
 -module(convertTemperature).
--export().
--import(displayTemperature,[loop/0]).
+-export([loop/0]).
 
-Display = spawn(fun displayTemperature:loop/0).
+convert_to_celius(F) ->
+	(float(F) + 32.0) * (5/9).
 
-ConvertToCelcius = 
-	fun(F) ->
-		(float(F) + 32.0) * (5/9).
-	end.
-
-ConvertToFahrenheit = 
-	fun(C) ->
-		(float(C) * (9/5)) + 32.0.
-	end.
+convert_to_fahrenheit(C) ->
+	(float(C) * (9/5)) + 32.0.
 
 loop() ->
+	Pid = spawn(fun displayTemperature:loop/0),
 	receive
-		{convertToCelius, F} ->
-			Display ! 
-				{temperature, {ConvertToCelcius(F), float(F)}};
-		{convertToFahrenheit, C} ->
-			Display !
-				(temperature, {float(C), ConvertToFahrenheit(C)});
+		{convert_fahrenheit, F} ->
+			Pid ! {temperature, {convert_to_celius(F), float(F)}},
+			loop();
+		{convertT_celcius, C} ->
+			Pid ! {temperature, {float(C), convert_to_fahrenheit(C)}},
+			loop();
 		_ ->
-			Display ! "Can't convert";
+			Pid ! "Can't convert",
+			loop()
 	end.
