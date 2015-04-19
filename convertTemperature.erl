@@ -8,15 +8,15 @@ convert_to_fahrenheit(C) ->
 	(float(C) * (9/5)) + 32.0.
 
 loop() ->
-	Pid = spawn(fun displayTemperature:loop/0),
+	Display = spawn(fun displayTemperature:loop/0),
 	receive
 		{convert_fahrenheit, F} ->
-			Pid ! {temperature, {convert_to_celius(F), float(F)}},
+			Display ! {temperature, {convert_to_celius(F), float(F)}},
 			loop();
-		{convertT_celcius, C} ->
-			Pid ! {temperature, {float(C), convert_to_fahrenheit(C)}},
+		{convert_celcius, C} ->
+			Display ! {temperature, {float(C), convert_to_fahrenheit(C)}},
 			loop();
 		_ ->
-			Pid ! "Can't convert",
+			Display ! "Can't convert",
 			loop()
 	end.
