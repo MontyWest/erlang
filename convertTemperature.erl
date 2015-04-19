@@ -2,7 +2,7 @@
 -export([loop/0]).
 
 convert_to_celius(F) ->
-	(float(F) + 32.0) * (5/9).
+	(float(F) - 32.0) * (5/9).
 
 convert_to_fahrenheit(C) ->
 	(float(C) * (9/5)) + 32.0.
