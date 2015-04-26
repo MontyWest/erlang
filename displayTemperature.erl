@@ -3,6 +3,7 @@
 
 loop() ->
 	receive
+		% Recieve a temperature message and displays passed celcius and fahrenheit temps as 2 d.p. floats
 		{temperature, {C, F}} ->
 			io:fwrite("Celcius: ~.2f, Fahrenheit: ~.2f ~n", [C, F]),
 			loop();

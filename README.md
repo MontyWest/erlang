@@ -1,11 +1,13 @@
 # erlang
-Temperature converting in Erlang
+## Temperature converting in Erlang
 
-By Monty West - mwest06
+### Author:
+Monty West - mwest06
 
-Clone the repo, and move to the directory.
+### Running:
+-Clone the repo, and move to the directory.
 
-Then run:
+-Then run:
 ```
 erl -make
 erl -noshell -eval 'controller:start(), init:stop().'
