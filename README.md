@@ -5,9 +5,9 @@
 Monty West - mwest06
 
 ### Running:
--Clone the repo, and move to the directory.
+- Clone the repo, and move to the directory.
 
--Then run:
+- Then run:
 ```
 erl -make
 erl -noshell -eval 'controller:start(), init:stop().'
